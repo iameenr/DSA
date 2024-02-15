@@ -3,11 +3,26 @@ class Solution:
         """
         Do not return anything, modify arr in-place instead.
         """
-        i = 0
-        while i < len(arr):
+        zeroes_count = 0  
+        length_ = len(arr) - 1
+
+        # Find the number of possible duplicates and the rightmost index 
+        for left in range(length_ + 1):
+            if left > length_ - zeroes_count:
+                break
+            if arr[left] == 0:
+                if left == length_ - zeroes_count:  # Edge case for a last zero
+                    arr[length_] = 0  
+                    length_ -= 1
+                    break
+                zeroes_count += 1
+
+        # Start from the end and shift elements for duplication
+        last = length_ - zeroes_count  
+        for i in range(last, -1, -1):
             if arr[i] == 0:
-                arr.insert(i + 1, 0) 
-                arr.pop()           
-                i += 2               
+                arr[i + zeroes_count] = 0
+                zeroes_count -= 1
+                arr[i + zeroes_count] = 0
             else:
-                i += 1
+                arr[i + zeroes_count] = arr[i]
