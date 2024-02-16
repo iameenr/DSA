@@ -3,7 +3,7 @@ class Solution:
         
         flargest, slargest = -1, -1
         for c in s:
-            if c.isdigit():
+            if c.isnumeric():
                 n = int(c)
                 if n > flargest:
                     slargest, flargest = flargest, n
