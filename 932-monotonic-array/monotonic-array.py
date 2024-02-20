@@ -4,21 +4,16 @@ class Solution:
         inc, dec = None, None
         lennums = len(nums)
 
-        prev = nums[0]
         for i in range(1, lennums):
-            n = nums[i]
-            if n < prev:
+            if nums[i] < nums[i-1]:
                 dec = True
                 break
-            prev = n
 
-        prev = nums[0]
+
         for i in range(1, lennums):
-            n = nums[i]
-            if n > prev:
+            if nums[i] > nums[i-1]:
                 inc = True
                 break
-            prev = n
          
         if inc and dec:
             return False        
