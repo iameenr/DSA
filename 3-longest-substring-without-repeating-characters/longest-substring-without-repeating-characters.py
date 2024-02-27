@@ -1,19 +1,16 @@
-"""Better"""
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        if s == "": return 0
 
-        longest_substring_len = 0
-        start = 0
-        window = set();   # {(char : index)}
-        for end, char in enumerate(s):
-            while char in window:
-                window.remove(s[start])
-                start += 1
+        start = max_window_length = 0
+        window = dict()
 
-            window.add(char)
-            longest_substring_len = max(longest_substring_len, (end-start)+1)
+        for end, c in enumerate(s):
 
-        return longest_substring_len
+            if window.get(c, -1) >= start:
+                start = window[c] + 1
 
+            max_window_length = max(max_window_length, end - start + 1)
+            window[c] = end
 
+        return max_window_length
+        
