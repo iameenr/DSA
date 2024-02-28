@@ -1,12 +1,21 @@
 class Solution:
     def detectCycle(self, head: Optional[ListNode]) -> Optional[ListNode]:
-        visited = set()
-        node = head
+        if(head is None): return None
 
-        while node:
-            if node in visited:
-                return node
-            visited.add(node)
-            node = node.next
+        slow, fast = head, head
+        while fast and fast.next:
+            slow = slow.next
+            fast = fast.next.next
+            if slow == fast:
+                """
+                this point is prefix node length prior on the to the cycle start, 
+                that is if you move prefix length then you'll be at the cycle start
+                """
+                slow = head
+                while slow != fast:
+                    slow = slow.next
+                    fast = fast.next
 
-        return None  
+                return slow 
+
+        return None
