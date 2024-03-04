@@ -1,9 +1,11 @@
 class Solution:
     def maxLengthBetweenEqualCharacters(self, string: str) -> int: 
-        maxl = -1
-        for s in range(len(string)):
-            for e in range(len(string) - 1, s, -1):
-                if string[s] == string[e]:
-                    maxl = max(maxl, e - s - 1)
-                    break  
-        return maxl
+        start_index = {}
+        max_length = -1
+
+        for end, char in enumerate(string):
+            if char not in start_index:
+                start_index[char] = end
+            max_length = max(max_length, ((end - start_index[char] - 1)))
+
+        return max_length
