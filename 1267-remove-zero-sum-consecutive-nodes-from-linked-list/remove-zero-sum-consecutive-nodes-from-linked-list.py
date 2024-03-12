@@ -1,3 +1,11 @@
+"""
+Q: 
+subarray_sum = 0
+
+prefix_sum(currpoint) - prefix_sum(prevpoint)  = 0
+prefix_sum(currpoint) = prefix_sum(prevpoint)
+"""
+
 class Solution:
     def removeZeroSumSublists(self, head: Optional[ListNode]) -> Optional[ListNode]:
         dummy = ListNode(0)
@@ -12,9 +20,12 @@ class Solution:
                 node = sum_dict[prefix_sum].next
                 temp_sum = prefix_sum
                 while node != curr:
+                    # Remove all nodes between the previos point (exclusive) of the prefix_sum to the current_point (inclusive)
                     temp_sum += node.val
                     del sum_dict[temp_sum]
                     node = node.next
+                
+                # Linking the pp to cp
                 sum_dict[prefix_sum].next = curr.next
             else:
                 sum_dict[prefix_sum] = curr
