@@ -3,12 +3,13 @@ class Solution:
         def merge_intervals(intervals):
             if not intervals:
                 return []
-            
+
+            START, END = 0, 1
             left = 0  # Pointer to the last non-merged interval
             for right in range(1, len(intervals)):
                 # If the current interval can be merged with the last non-merged interval
-                if intervals[left][1] >= intervals[right][0]:
-                    intervals[left][1] = max(intervals[left][1], intervals[right][1])
+                if intervals[left][END] >= intervals[right][START]:
+                    intervals[left][END] = max(intervals[left][END], intervals[right][END])
                 else:
                     left += 1
                     intervals[left] = intervals[right]
