@@ -1,13 +1,14 @@
-class Solution(object):
-    def letterCombinations(self, digits):
-        def backtrack(c, i):
-            if i == len(digits):
+class Solution:
+    def letterCombinations(self, digits: str) -> List[str]:
+        def combine(c, index):
+            if index == lendigits:
                 yield c
             else:
-                for l in digits_to_letters[digits[i]]:
-                    yield from backtrack(c + l, i+1)
+                for char in digits_to_letters[digits[index]]:
+                    yield from combine(c + char, index+1)
+            
 
-
+        if digits == "": return ""      
         digits_to_letters = {
             '2': 'abc',
             '3': 'def',
@@ -17,7 +18,7 @@ class Solution(object):
             '7': 'pqrs',
             '8': 'tuv',
             '9': 'wxyz',
-         }
+        }
+        lendigits = len(digits)
+        return [c for c in combine("", 0)]
         
-        if digits == "": return ""            
-        return [combination for combination in backtrack("", 0)]
