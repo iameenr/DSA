@@ -5,7 +5,7 @@ class Solution:
         if root is None: return []
 
         lot = []
-        # bfs
+        # bfs:
         q = deque([root]) 
         while q:
             level = []
