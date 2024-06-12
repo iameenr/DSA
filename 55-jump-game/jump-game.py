@@ -1,13 +1,16 @@
 class Solution:
     def canJump(self, nums: List[int]) -> bool:
-        end_index = len(nums)-1
-        maxreach = 0
 
-        for index, jump in enumerate(nums):
-            if index > maxreach: 
+        lennums = len(nums)
+        
+        max_reach = 0
+        for index in range(lennums):
+            if index > max_reach:
                 return False
-            maxreach = max(maxreach, (index + jump))
-            if maxreach >= end_index:
+            
+            reach = index + nums[index]
+            max_reach = max(max_reach, reach)
+            if max_reach >= (lennums - 1):
                 return True
 
         return False
