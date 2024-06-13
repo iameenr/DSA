@@ -8,11 +8,12 @@ class Solution:
         res = []
 
         while num != 0:
-            rem = num % 7
-            res.append(str(rem))
-            num = num // 7
+            # remainder = num % 7
+            res.append(str(num % 7))
+            num //= 7
 
         if negative:
             res.append('-')
 
-        return "".join(reversed(res))
+        return "".join(res[::-1])
+
