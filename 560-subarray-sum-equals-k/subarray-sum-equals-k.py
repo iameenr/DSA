@@ -1,18 +1,19 @@
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        ps = 0
-        all_psc = {0 : 1}
-        res = 0
+        prefix_sum = 0
+        prefix_sum_dict = {0 : 1}
+
+        result = 0
         for n in nums:
-            ps += n
+            prefix_sum = prefix_sum + n
+            want = prefix_sum - k
+            
+            if want in prefix_sum_dict:
+                result += prefix_sum_dict[want]
 
-            key = ps - k
+            if prefix_sum not in prefix_sum_dict:
+                prefix_sum_dict[prefix_sum] = 0
+                
+            prefix_sum_dict[prefix_sum] += 1
 
-            if key in all_psc:
-                res = res + all_psc[key]
-            if ps not in all_psc:
-                all_psc[ps] = 0
-
-            all_psc[ps] += 1
-
-        return res
+        return result
