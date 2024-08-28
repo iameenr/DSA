@@ -15,5 +15,6 @@ class Solution:
                 window_sum -= nums[start]
                 start += 1
 
-        if min_window_length == math.inf: return 0
+        if min_window_length == math.inf: 
+            return 0
         return min_window_length
