@@ -7,24 +7,20 @@ class Solution:
             
             return l+1, r-1
 
-        maxleft, maxright = 0, 0
+        least_left, max_right = 0, 0
         maxlen = -math.inf
         lens = len(s)
-        for c in range(0, lens):
+        for center in range(0, lens):
             # odd length
-            # l, r = c, c
-            currleft, currright = _expand_from_center(c, c)
-            currlen = (currright-currleft)+1
-            if currlen > maxlen:
-                maxleft, maxright = currleft, currright
-                maxlen = currlen
+            # l, r = center, center
+            li, ri = _expand_from_center(center, center)
+            if (ri - li) + 1 > (max_right - least_left) + 1:
+                least_left, max_right = li, ri
 
             # even length
-            # l, r = c, c+1
-            currleft, currright = _expand_from_center(c, c+1)
-            currlen = (currright-currleft)+1
-            if currlen > maxlen:
-                maxleft, maxright = currleft, currright
-                maxlen = currlen
+            # l, r = center, center+1
+            li, ri = _expand_from_center(center, center+1)
+            if (ri - li) + 1 > (max_right - least_left) + 1:
+                least_left, max_right = li, ri
 
-        return s[maxleft:maxright+1]
+        return s[least_left:max_right+1]
