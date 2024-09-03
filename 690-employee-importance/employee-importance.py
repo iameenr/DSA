@@ -17,8 +17,8 @@ class Solution:
             summ = 0
             q = deque([start])
             while q:
-                node = q.popleft()
-                e = empd[node]
+                # node = q.popleft()
+                e = empd[q.popleft()]
                 summ += e.importance
 
                 for nei in e.subordinates:
