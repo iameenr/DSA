@@ -13,18 +13,16 @@ class Solution:
         for e in employees:
             empd[e.id] = e
 
-        def bfs(start):
-            summ = 0
-            q = deque([start])
-            while q:
-                # node = q.popleft()
-                e = empd[q.popleft()]
-                summ += e.importance
+        total_importance = 0
+        q = deque([id])
+        while q:
+            # node = q.popleft()
+            e = empd[q.popleft()]
+            total_importance += e.importance
 
-                for nei in e.subordinates:
-                    q.append(nei)
+            for nei in e.subordinates:
+                q.append(nei)
 
-            return summ
+        return total_importance
 
-        return bfs(id)
     
