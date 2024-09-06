@@ -16,3 +16,4 @@ class Solution:
                 inc = False
 
         return ans
+
