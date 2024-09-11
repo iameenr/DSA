@@ -1,20 +1,13 @@
 class Solution:
-    def rob(self, nums: List[int]) -> int:
-        def _rob(index, memo):
-            if index >= len(nums):
-                return 0
-
-            if index in memo:
-                return memo[index]
-
-            rob_current = _rob(index+2, memo) + nums[index]
-            rob_next = _rob(index+1, memo)
-
-            max_profit = max(rob_current, rob_next)
-
-            memo[index] = max_profit
-            return max_profit
-
-        memo = {}
-        return _rob(0, memo)
+    def rob(self, profit: List[int]) -> int:
+        houses = len(profit)
+        if houses == 1: return profit[0]
+        if houses == 2: return max(profit[0], profit[1])
         
+        first, second = profit[0], max(profit[0], profit[1])
+        for house in range(2, houses):
+            current = max(first + profit[house], second)
+            first = second
+            second = current
+
+        return current
