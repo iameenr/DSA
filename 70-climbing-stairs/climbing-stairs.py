@@ -22,13 +22,13 @@ class Solution:
         if n == 1: return 1
         if n == 2: return 2
 
-        dp = [0]*(n+1)   
-        dp[0], dp[1], dp[2] = 0, 1, 2
-
+        first, second = 1, 2
         for s in range(3, n+1):
-            dp[s] = dp[s-1] + dp[s-2]
+            current = first + second            
+            first = second
+            second = current
 
-        return dp[n]
+        return current
 
 
 
