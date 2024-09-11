@@ -19,8 +19,8 @@ class Solution:
         #     memo[n] = ways(n-1) + ways(n-2)
         #     return memo[n]
 
-        if n == 1: return 1
-        if n == 2: return 2
+        if n <= 3: 
+            return n
 
         first, second = 1, 2
         for s in range(3, n+1):
