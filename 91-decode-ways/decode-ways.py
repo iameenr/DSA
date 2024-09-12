@@ -26,4 +26,3 @@ class Solution:
         lens = len(s)
         memo = {}
         return f(0)
-
