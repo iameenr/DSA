@@ -6,32 +6,30 @@ class Stack:
         self.stack.append(value)
 
     def pop(self):
-        return self.stack.pop() if self.is_not_empty() else None
+        return self.stack.pop()
     
     def peek(self):
-        return self.stack[-1] if self.is_not_empty() else None
+        return self.stack[-1]
 
-    def is_not_empty(self):
-        if self.stack:
-            return True
-        return False
-
+    def is_empty(self):
+        return not self.stack
 
 class MinStack:
     def __init__(self):
         self.min_stack = Stack()
-        self.min_stack.push(math.inf)
         self.stack = Stack()
 
     def push(self, val: int) -> None:
-        if self.min_stack.is_not_empty() and val <= self.min_stack.peek():
-                self.min_stack.push(val)
+
         self.stack.push(val)
 
+        if self.min_stack.is_empty() or val <= self.min_stack.peek():
+            self.min_stack.push(val)
+        
     def pop(self) -> None:
-        if self.stack.is_not_empty():
-            if self.stack.pop() == self.min_stack.peek():
-                self.min_stack.pop()
+        # popped = self.stack.pop()
+        if self.stack.pop() == self.min_stack.peek():
+            self.min_stack.pop()
         
     def top(self) -> int:
         return self.stack.peek()
