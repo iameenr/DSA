@@ -1,14 +1,6 @@
 class Solution:
     def letterCombinations(self, digits: str) -> List[str]:
-        def combine(c, index):
-            if index == lendigits:
-                yield c
-            else:
-                for char in digits_to_letters[digits[index]]:
-                    yield from combine(c + char, index+1)
-            
-
-        if digits == "": return ""      
+        
         digits_to_letters = {
             '2': 'abc',
             '3': 'def',
@@ -18,7 +10,22 @@ class Solution:
             '7': 'pqrs',
             '8': 'tuv',
             '9': 'wxyz',
-        }
-        lendigits = len(digits)
-        return [c for c in combine("", 0)]
-        
+         }
+
+        def combine(index, combination):
+            if index == end:
+                combinations.append("".join(combination))
+                return
+
+            # digit = digits[index]
+            for c in digits_to_letters[digits[index]]:
+                combine(index+1, combination + [c])
+            
+
+        if digits == "": 
+            return []
+
+        end = len(digits)
+        combinations = []
+        combine(0, [])
+        return combinations
