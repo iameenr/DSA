@@ -1,13 +1,25 @@
+class Stack:
+    def __init__(self):
+        self.stack = []
+    
+    def push(self, item):
+        self.stack.append(item)
+
+    def pop(self):
+        if self.stack:
+            return self.stack.pop()
+
+
 class Solution:
     def simplifyPath(self, path: str) -> str:
         
-        stack = []
+        stack = Stack()
         for dirr in path.split('/'):
             if dirr == "..": 
-                if stack: stack.pop()
+                stack.pop()
 
             elif dirr and dirr != '.':
-                stack.append(dirr)
+                stack.push(dirr)
 
         # print(stack)
-        return '/' + "/".join(stack)
+        return '/' + "/".join(stack.stack)
