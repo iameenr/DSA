@@ -4,6 +4,7 @@ class Solution:
         closest_number = nums[0]
 
         for n in nums:
+            if n == 0: return 0
             distance = abs(n)
             if distance < closest_distance or \
                (distance == closest_distance and n > closest_number):
