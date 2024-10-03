@@ -1,20 +1,12 @@
 class Solution:
     def partitionLabels(self, s: str) -> List[int]:
         
-        def get_first_last_occurence(s):
-            first_last_dict = {} # c : [foc, loc] | a : [0, 9]
-            LOC = 1
-            seen = set()
+        def get_last_occurence(s):
+            last_occurence = {} # c : loc like a : 9
             for i, c in enumerate(s):
-                if c in seen:
-                    # next occurence
-                    first_last_dict[c][LOC] = i
-                else:
-                    # first_last_dict[c][FOC], first_last_dict[c][LOC] = i, i
-                    first_last_dict[c] = [i, i]
-                    seen.add(c)
+                last_occurence[c] = i
 
-            return first_last_dict
+            return last_occurence
 
         def merge_overlapping_intervals(intervals):
             # merge_overlapping intervals
@@ -35,11 +27,15 @@ class Solution:
 
             return merged_intervals
 
-        first_last_dict = get_first_last_occurence(s)
+        last_occurence = get_last_occurence(s)
 
         intervals = []
-        for k, v in first_last_dict.items():
-            intervals.append(v)
+        seen = set()
+        for i, c in enumerate(s):
+            if c not in seen:
+                seen.add(c)
+                intervals.append([i, last_occurence[c]])
+
 
         merged_intervals = merge_overlapping_intervals(intervals)
 
