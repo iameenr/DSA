@@ -1,28 +1,32 @@
-from typing import Optional
+"""
+# Definition for a Node.
+class Node:
+    def __init__(self, val = 0, neighbors = None):
+        self.val = val
+        self.neighbors = neighbors if neighbors is not None else []
+"""
 
+from typing import Optional
 class Solution:
     def cloneGraph(self, node: Optional['Node']) -> Optional['Node']:
-        if not node:
+        if node is None:
             return None
-        
 
-        seen = {}
+        def dfs(node, clone_node):
+            clone_node.val = node.val
+            cloned[node] = clone_node
 
-        def dfs(node, copynode):
-            seen[node] = copynode
-            copynode.val = node.val 
-            
-            
-            for nei in node.neighbors:
-                if nei not in seen:  
-                    new_clone = Node() 
-                    copynode.neighbors.append(new_clone)  
-                    dfs(nei, new_clone)  
+            for neighbor in node.neighbors:
+                if neighbor not in cloned:
+                    clone_neighbor = Node()
+                    dfs(neighbor, clone_neighbor)
+                    clone_node.neighbors.append(clone_neighbor)
                 else:
-                    copynode.neighbors.append(seen[nei])
-        
-    
-        copyheadnode = Node()  
-        dfs(node, copyheadnode)  
-        
-        return copyheadnode
+                    clone_node.neighbors.append(cloned[neighbor])
+
+
+        cloned = {} # node : clone_node
+        clone_head = Node()
+        dfs(node, clone_head)
+        return clone_head
+
