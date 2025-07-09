@@ -1,19 +1,30 @@
 class Solution:
     def rob(self, profit: List[int]) -> int:
-        memo = {}
+        """MEMOIZATION"""
+        # n = len(profit)
+        # if n == 1:
+        #     return profit[0]
+        # if n == 2:
+        #     return max(profit[0], profit[1])
+        
+        # dp = [0] * n
+        # dp[0] = profit[0]
+        # dp[1] = max(profit[0], profit[1])
+        
+        # for i in range(2, n):
+        #     dp[i] = max(dp[i-1], dp[i-2] + profit[i])
+        
+        # return dp[n-1]
 
-        def _rob(house):
-            if house == 0:
-                return profit[house]
-            if house == 1:
-                return max(profit[0], profit[1])
-            if house in memo:
-                return memo[house]
-                
-            rob_this_house = _rob(house-2) + profit[house]
-            dont_rob_this_house = _rob(house-1)
-            max_profit = max(rob_this_house, dont_rob_this_house)
-            memo[house] = max_profit
-            return max_profit
+        """DP"""
+        houses = len(profit)
+        if houses == 1: return profit[0]
+        if houses == 2: return max(profit[0], profit[1])
+        
+        first, second = profit[0], max(profit[0], profit[1])
+        for house in range(2, houses):
+            current = max(first + profit[house], second)
+            first = second
+            second = current
 
-        return _rob(len(profit)-1)
+        return current
