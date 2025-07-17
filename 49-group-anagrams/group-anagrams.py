@@ -2,6 +2,8 @@ from collections import defaultdict
 
 class Solution:
     def groupAnagrams(self, words: List[str]) -> List[List[str]]:
+        """the product of 2 or more prime numbers is always unique"""
+
         # Map each lowercase letter to a distinct prime number.
         LETTER_TO_PRIME = {
             'a': 2,   'b': 3,   'c': 5,   'd': 7,   'e': 11,
