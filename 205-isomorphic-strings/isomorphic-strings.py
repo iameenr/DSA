@@ -1,19 +1,24 @@
 class Solution:
     def isIsomorphic(self, s: str, t: str) -> bool:
-        
-        character_map = {}     # e : a, g : d
-        mapped_characters = {} # a : e, d : g
-        for index, char_s in enumerate(s):
-            if char_s not in character_map:
-                char_t = t[index]
-                if char_t not in mapped_characters:
-                    character_map[char_s] = char_t
-                    mapped_characters[char_t] = char_s
-                else:
-                    if mapped_characters[char_t] != char_s:
-                        return False
-            else: # index have seen this character
-                if character_map[char_s] != t[index]:
-                    return False
+        if len(s) != len(t):
+            return False
 
-        return True         
+        map_s = {}
+        map_t = {}
+
+        for i in range(len(s)):
+            char_s, char_t = s[i], t[i]
+
+            # Check mapping from s to t
+            if char_s not in map_s:
+                map_s[char_s] = char_t
+            elif map_s[char_s] != char_t:
+                return False  # Existing mapping for char_s is different
+
+            # Check mapping from t to s
+            if char_t not in map_t:
+                map_t[char_t] = char_s
+            elif map_t[char_t] != char_s:
+                return False  # Existing mapping for char_t is different
+        
+        return True
