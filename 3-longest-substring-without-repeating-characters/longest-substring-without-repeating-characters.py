@@ -1,6 +1,7 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
-        if s=="": return 0
+        if s == "": 
+            return 0
 
         longest_substring_yet = 0
         window_start = 0
