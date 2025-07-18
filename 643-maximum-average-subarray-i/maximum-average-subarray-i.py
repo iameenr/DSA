@@ -1,19 +1,19 @@
-from typing import List
-
 class Solution:
     def findMaxAverage(self, nums: List[int], k: int) -> float:
-        ws = 0
+        window_sum = 0
         for i in range(k):
-            ws += nums[i]
+            window_sum += nums[i]
         
-        maxavg = ws / k
-        wst = 0 
+        max_average = window_sum / k
+        
+        window_start = 0 
+        
         for i in range(k, len(nums)):
-            ws = ws - nums[wst] + nums[i]
+            window_sum = window_sum - nums[window_start] + nums[i]
             
-            wst += 1
+            window_start += 1
             
-            curravg = ws / k
-            maxavg = max(maxavg, curravg)
+            curravg = window_sum / k
+            max_average = max(max_average, curravg)
 
-        return maxavg
+        return max_average
