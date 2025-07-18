@@ -1,16 +1,16 @@
 class Solution:
     def lengthOfLongestSubstring(self, s: str) -> int:
+        if s=="": return 0
 
-        start = max_window_length = 0
-        window = dict()
+        longest_substring_yet = 0
+        window_start = 0
+        window = set();   # {(char : index)}
+        for end, char in enumerate(s):
+            while char in window:
+                window.remove(s[window_start])
+                window_start += 1
+            window.add(char)
 
-        for end, c in enumerate(s):
+            longest_substring_yet = max(longest_substring_yet, (end-window_start)+1)
 
-            if window.get(c, -1) >= start:
-                start = window[c] + 1
-
-            max_window_length = max(max_window_length, end - start + 1)
-            window[c] = end
-
-        return max_window_length
-        
+        return longest_substring_yet
