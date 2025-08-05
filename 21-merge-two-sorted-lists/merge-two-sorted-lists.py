@@ -1,21 +1,20 @@
+
 class Solution:
     def mergeTwoLists(self, list1: Optional[ListNode], list2: Optional[ListNode]) -> Optional[ListNode]:
-        if list1 is None: return list2
-        if list2 is None: return list1
+        dummy = ListNode()
+        tail = dummy
 
-        head = ListNode(0); dummy = head
-
+        # Traverse both lists as long as neither is exhausted.
         while list1 and list2:
-            if list1.val <= list2.val: 
-                head.next = list1
+            if list1.val < list2.val:
+                tail.next = list1
                 list1 = list1.next
-            else: 
-                head.next = list2
+            else:
+                tail.next = list2
                 list2 = list2.next
-            head = head.next
-
-        if list1 is None: head.next = list2
-        if list2 is None: head.next = list1
-
-        return dummy.next
+            # Move the tail pointer to the newly added node.
+            tail = tail.next
         
+        tail.next = list1 or list2
+            
+        return dummy.next
