@@ -1,14 +1,24 @@
 class Solution:
     def productExceptSelf(self, nums: List[int]) -> List[int]:
         lennums = len(nums)
-        result=[1]*lennums
+        if lennums == 0: 
+            return []
 
-        prefix_product = 1
-        post = 1
+        prefix_product_list = [1] * lennums
+        suffix_product_list = [1] * lennums
+        product_except_self = [1] * lennums
+
+        running_product = 1
         for i in range(lennums):
-            result[i] *= prefix_product
-            prefix_product = prefix_product*nums[i]
-            result[lennums-i-1] *= post
-            post = post*nums[lennums-i-1]
+            prefix_product_list[i] = running_product
+            running_product *= nums[i]
+            
+        running_product = 1
+        for i in range(lennums - 1, -1, -1):
+            suffix_product_list[i] = running_product
+            running_product *= nums[i]
 
-        return result
+        for i in range(0, lennums):
+            product_except_self[i] = prefix_product_list[i] * suffix_product_list[i]
+
+        return product_except_self
