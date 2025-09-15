@@ -3,15 +3,16 @@ class Solution:
         if s == "": 
             return 0
 
-        longest_substring_yet = 0
+        longest_substring_so_far = 0
         window_start = 0
-        window = set();   # {(char : index)}
+        window = set()  # set{ char, char2 }
         for end, char in enumerate(s):
             while char in window:
                 window.remove(s[window_start])
                 window_start += 1
             window.add(char)
 
-            longest_substring_yet = max(longest_substring_yet, (end-window_start)+1)
+            # current_window_length = (end - window_start) + 1
+            longest_substring_so_far = max(longest_substring_so_far, (end - window_start) + 1)
 
-        return longest_substring_yet
+        return longest_substring_so_far
