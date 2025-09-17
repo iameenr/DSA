@@ -1,16 +1,17 @@
 class Solution:
     def waysToSplitArray(self, nums: List[int]) -> int:
+        valid_splits = 0 # result
         lennums = len(nums)
-        valid_splits = 0
-        ts = 0
+
+        total_sum = 0
         for n in nums:
-            ts += n
+            total_sum += n
         
-        ps = 0
+        prefix_sum = 0
         for i in range(0, lennums - 1):
-            ps += nums[i]
-            # sum_of_rest = (ts - ps)
-            if ps >= (ts - ps):
+            prefix_sum += nums[i]
+            # sum_of_rest = (total_sum - prefix_sum)
+            if prefix_sum >= (total_sum - prefix_sum):
                 valid_splits += 1
 
         return valid_splits
