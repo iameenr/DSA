@@ -4,10 +4,10 @@ class Solution:
         n = len(nums)
         answer = [0] * n
 
-        left_sum = 0
+        prefix_sum = 0
         for i in range(n):
-            right_sum = total_sum - left_sum - nums[i]
-            answer[i] = abs(left_sum - right_sum)
-            left_sum += nums[i]
+            suffix_sum = total_sum - prefix_sum - nums[i]
+            answer[i] = abs(prefix_sum - suffix_sum)
+            prefix_sum += nums[i]
             
         return answer
