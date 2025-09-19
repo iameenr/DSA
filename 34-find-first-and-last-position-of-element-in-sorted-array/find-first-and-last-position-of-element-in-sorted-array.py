@@ -17,7 +17,7 @@ class Solution:
 
         def get_upper_bound(nums, target):
             low, high = 0, len(nums) - 1
-            upper_bound = -1
+            upper_bound = len(nums) # Assuming it's not present
             while low <= high:
                 mid = (low + high) // 2
                 if target < nums[mid]:
@@ -34,8 +34,8 @@ class Solution:
 
         if lower_bound == -1 or nums[lower_bound] != target:
             return [-1, -1]
-        if lower_bound != -1 and upper_bound == -1:
-            return [lower_bound, len(nums)-1]
+        # if lower_bound != -1 and upper_bound == -1:
+        #     return [lower_bound, len(nums)-1]
 
         # now,
         # first_occurence = lower_bound
