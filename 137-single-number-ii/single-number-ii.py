@@ -1,12 +1,12 @@
 class Solution:
     def singleNumber(self, nums):
-        count = defaultdict(int)
+        count_map = defaultdict(int)
         
-        for x in nums:
-            count[x] += 1
+        for n in nums:
+            count_map[n] += 1
 
-        for x, freq in count.items():
+        for n, freq in count_map.items():
             if freq == 1:
-                return x
+                return n
         
         return -1
