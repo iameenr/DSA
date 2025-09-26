@@ -1,6 +1,7 @@
 class Solution:
     def singleNumber(self, nums: List[int]) -> int:
-        xor_ = 0
+        xor = 0
         for n in nums:
-            xor_ = xor_ ^ n
-        return xor_
+            xor ^= n
+
+        return xor 
