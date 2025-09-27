@@ -20,7 +20,7 @@ class Solution:
         
     # If total_tank is non-negative, a solution exists.
     # The start_station found is the correct one.
-    # Otherwise, it's impossible to complete the circuit.
+    # Otherwise it's impossible to complete the circuit.
     if total_tank >= 0:
         return start_station
     else:
