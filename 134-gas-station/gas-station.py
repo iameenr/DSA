@@ -1,22 +1,20 @@
 class Solution:
     def canCompleteCircuit(self, gas: List[int], cost: List[int]) -> int:
-        ts = len(gas) - 1
-        tg = tc = 0
-        for i in range(ts+1):
-            tg += gas[i]
-            tc += cost[i]
-        if tg < tc: # not possible
+        total_stops = len(gas) - 1
+        total_gas  = sum(gas)
+        total_cost = sum(cost)
+        if total_gas < total_cost: # not possible
             return -1
 
-        tnc = 0
+        total_net_cost = 0
         start_idx = 0
-        for i in range(ts+1):
-            nc = gas[i] - cost[i]
-            tnc += nc
+        for i in range(total_stops+1):
+            net_cost = gas[i] - cost[i]
+            total_net_cost += net_cost
 
-            if tnc < 0:
+            if total_net_cost < 0:
                 # reset
-                tnc = 0
+                total_net_cost = 0
                 start_idx = i+1
 
         return start_idx
