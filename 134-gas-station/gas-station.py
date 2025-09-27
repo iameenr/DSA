@@ -12,8 +12,7 @@ class Solution:
             net_cost = gas[i] - cost[i]
             total_net_cost += net_cost
 
-            if total_net_cost < 0:
-                # reset
+            if total_net_cost < 0: # reset
                 total_net_cost = 0
                 start_idx = i+1
 
