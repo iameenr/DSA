@@ -1,16 +1,17 @@
 class Solution:
     def subsets(self, nums: List[int]) -> List[List[int]]:
-        def _subsets(index):
-            if index == numslen:
+        lennums = len(nums)
+        def _get_subsets(index):
+            if index >= lennums:
                 yield []
-            else:
-                # first = [nums[index]]
-                # rest = index + 1
-                for subset in _subsets(index + 1):
-                    yield subset
-                    yield [nums[index]] + subset
+                return 
+
+            first = nums[index]
+            # rest = nums[index:]
+            for subset in _get_subsets(index + 1):
+                yield subset
+                yield [first] + subset
+
+        return list(_get_subsets(0))
+
         
-        numslen = len(nums)
-        return [subset for subset in _subsets(0)]
-
-
