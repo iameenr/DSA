@@ -2,9 +2,9 @@ from collections import defaultdict
 
 class Solution:
     def groupAnagrams(self, words: List[str]) -> List[List[str]]:
-        """the product of 2 or more prime numbers is always unique"""
+        """the product of 2 or more prime numbers is always unique
+            so this helps us uniquely identify words formed from same set of letters."""
 
-        # Map each lowercase letter to a distinct prime number.
         LETTER_TO_PRIME = {
             'a': 2,   'b': 3,   'c': 5,   'd': 7,   'e': 11,
             'f': 13,  'g': 17,  'h': 19,  'i': 23,  'j': 29,
@@ -14,19 +14,19 @@ class Solution:
             'z': 101
         }
 
-        def prime_product(word):
-            """Compute the product of the prime representations of the word's letters."""
-            product = 1
-            for char in word:
-                product *= LETTER_TO_PRIME[char]
-            return product
+        def get_prime_product(word):
+            prime_product = 1
+            for c in word:
+                prime_product *= LETTER_TO_PRIME[c]
 
-        """Group words that are anagrams."""
-        groups = defaultdict(list)
-        for word in words:
-            key = prime_product(word)
-            groups[key].append(word)
+            return prime_product
+
         
-        return list(groups.values())
+        result = defaultdict(list) # {1562: [eat, tea, ate]}
+        for word in words:
+            prime_product = get_prime_product(word)
+            result[prime_product].append(word)
+
+        return [anagram for anagram in result.values()]
 
 
