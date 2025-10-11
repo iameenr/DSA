@@ -3,7 +3,7 @@ class Solution:
 
         maxx = result = 0
         for x in nums:
-            maxx = maxx | x
+            maxx |= x
 
         def dfs(i, t):
             nonlocal maxx, result
