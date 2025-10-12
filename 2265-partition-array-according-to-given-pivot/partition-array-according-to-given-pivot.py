@@ -1,13 +1,12 @@
 class Solution:
     def pivotArray(self, nums: List[int], pivot: int) -> List[int]:
-        lesser_than_list, equal_to_list, greater_than_list = [], [], []
+        lt, eq, gt = [], [], []
 
         for n in nums:
             if n < pivot:
-                lesser_than_list.append(n)
+                lt.append(n)
             elif n == pivot:
-                equal_to_list.append(n)
+                eq.append(n)
             else:
-                greater_than_list.append(n)
-                
-        return lesser_than_list + equal_to_list + greater_than_list
+                gt.append(n)
+        return lt + eq + gt
