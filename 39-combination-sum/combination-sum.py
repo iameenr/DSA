@@ -15,5 +15,5 @@ class Solution:
                     if i+1 < len(candidates):
                         yield from combination(i+1, target, seq)
             
-    
+
         return [c for c in combination(0, target, [])]
