@@ -2,19 +2,19 @@ from collections import defaultdict
 
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        # ps(curr) - ps(prev) = k
-        # ps(curr) - k = ps(prev) 
+        # prefix_sum(curr) - prefix_sum(prev) = k
+        # prefix_sum(curr) - k = prefix_sum(prev) 
 
-        psd = defaultdict(int) # {sum : number of times we've seen this sum}
-        psd[0] = 1
-        ps = 0
+        prefix_sum_dict = defaultdict(int) # {sum : number of times we've seen this sum}
+        prefix_sum_dict[0] = 1
+        prefix_sum = 0
 
         result = 0
         for n in nums:
-            ps += n
-            if(ps - k) in psd:
-                result += psd[(ps - k)]
-            psd[ps] += 1
+            prefix_sum += n
+            if(prefix_sum - k) in prefix_sum_dict:
+                result += prefix_sum_dict[(prefix_sum - k)]
+            prefix_sum_dict[prefix_sum] += 1
         
         return result
 
