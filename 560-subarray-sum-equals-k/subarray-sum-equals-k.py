@@ -1,19 +1,22 @@
+from collections import defaultdict
+
 class Solution:
     def subarraySum(self, nums: List[int], k: int) -> int:
-        
-        prefix_sum = 0
-        prefix_sum_dict = {0 : 1} # prefix_sum : num of times it was seen
-        times = 0
-        
+        # ps(curr) - ps(prev) = k
+        # ps(curr) - k = ps(prev) 
+
+        psd = defaultdict(int) # {sum : number of times we've seen this sum}
+        psd[0] = 1
+        ps = 0
+
+        result = 0
         for n in nums:
-            prefix_sum += n
+            ps += n
+            if(ps - k) in psd:
+                result += psd[(ps - k)]
+            psd[ps] += 1
+        
+        return result
 
-            target = prefix_sum - k
-            if target in prefix_sum_dict:
-                times = times + prefix_sum_dict[target]
+            
 
-            if prefix_sum not in prefix_sum_dict:
-                prefix_sum_dict[prefix_sum] = 0
-            prefix_sum_dict[prefix_sum] += 1
-
-        return times
