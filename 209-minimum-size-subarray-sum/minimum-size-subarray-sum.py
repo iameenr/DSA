@@ -1,25 +1,17 @@
 class Solution:
-    def minSubArrayLen(self, target: int, nums: List[int]) -> int:
-        min_window_length = math.inf
+    def minSubArrayLen(self, target: int, nums: List[int]) -> int: 
+        window_start = 0
         window_sum = 0
-        start = 0
+        min_window_len = float('inf')
+        for window_end, n in enumerate(nums):
+            window_sum += n
+            while window_sum >= target: 
+                # since window_sum > target, we shrink from left till it's not the case
+                currwl = (window_end - window_start) + 1
+                min_window_len = min(min_window_len, currwl)
+                window_sum -= nums[window_start]
+                window_start += 1
 
-        end = 0
-        while end in range(len(nums)):
-            window_sum += nums[end]
+        return 0 if min_window_len == float('inf') else min_window_len
 
-            while window_sum >= target:
-                # then shrink the window from left
-                # current_wl = (end - start) + 1
-                min_window_length = min(min_window_length, (end - start) + 1)
-
-                # shrinking
-                window_sum -= nums[start]
-                start += 1
-            
-            end += 1
-
-        if min_window_length == math.inf:
-            return 0
-        return min_window_length
             
