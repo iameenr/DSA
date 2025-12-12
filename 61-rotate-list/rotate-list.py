@@ -7,10 +7,12 @@ class Solution:
     def rotateRight(self, head: Optional[ListNode], k: int) -> Optional[ListNode]:
         if head is None or head.next is None:
             return head
-        cur, n = head, 0
-        while cur:
+
+        current, n = head, 0
+        while current:
             n += 1
-            cur = cur.next
+            current = current.next
+
         k %= n
         if k == 0:
             return head
@@ -23,4 +25,5 @@ class Solution:
         result = slow.next
         slow.next = None
         fast.next = head
+        
         return result
