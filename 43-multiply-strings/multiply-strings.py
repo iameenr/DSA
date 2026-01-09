@@ -4,17 +4,17 @@ class Solution:
             return "0"
 
         m, n = len(num1), len(num2)
-        arr = [0] * (m + n)
-        
+        array = [0] * (m + n)
+
         for i in range(m - 1, -1, -1):
             a = int(num1[i])
             for j in range(n - 1, -1, -1):
                 b = int(num2[j])
-                arr[i + j + 1] += a * b
+                array[i + j + 1] += a * b
 
         for i in range(m + n - 1, 0, -1):
-            arr[i - 1] += arr[i] // 10
-            arr[i] %= 10
-        i = 0 if arr[0] else 1
+            array[i - 1] += array[i] // 10
+            array[i] %= 10
+        i = 0 if array[0] else 1
 
-        return "".join(str(x) for x in arr[i:])
+        return "".join(str(num_str) for num_str in array[i:])
